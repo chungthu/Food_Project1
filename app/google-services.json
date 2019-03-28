@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1045889525981",
+    "firebase_url": "https://oder-food-2e100.firebaseio.com",
+    "project_id": "oder-food-2e100",
+    "storage_bucket": "oder-food-2e100.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045889525981:android:9d0ff30cf5481356",
+        "android_client_info": {
+          "package_name": "fpt.edu.com.food"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1045889525981-mi8798kh9hu1b8cjmn031hpim7n7du1v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fpt.edu.com.food",
+            "certificate_hash": "557c1efbf186da2fac0cc1cb62b17ddd4fe60853"
+          }
+        },
+        {
+          "client_id": "1045889525981-7m2m7ls5smv9q83h1ipq4ket5v7snvpn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPeTXmW-4p22wmRu_pMNyyuJ5OEME9Qlw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1045889525981-7m2m7ls5smv9q83h1ipq4ket5v7snvpn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

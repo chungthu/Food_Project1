@@ -46,6 +46,10 @@ public class LoginActivity extends AppCompatActivity {
         init();
         database = FirebaseDatabase.getInstance();
         DatabaseReference table_user = database.getReference("User");
+        String phone = edtPhone.getText().toString().trim();
+
+        final Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+        intent.putExtra("Account",phone);
 
 
         table_user.addValueEventListener(new ValueEventListener() {
@@ -60,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
                     if (user.getPassword().equals(edtPassword.getText().toString().trim())) {
                         Toast.makeText(LoginActivity.this, "Sign In successfully !", Toast.LENGTH_SHORT).show();
-//                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        startActivity(intent);
                         finish();
                     } else {
                         Toast.makeText(LoginActivity.this, "Sign In failed", Toast.LENGTH_SHORT).show();
@@ -70,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "User not exist in Databse", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 }
+//                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
 
             @Override
@@ -78,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+        startActivity(intent);
 
     }
 

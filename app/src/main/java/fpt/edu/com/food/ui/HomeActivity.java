@@ -1,10 +1,12 @@
 package fpt.edu.com.food.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,12 +16,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import fpt.edu.com.food.R;
+import fpt.edu.com.food.fragment.CartFragment;
 import fpt.edu.com.food.fragment.CategoryFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private TextView txt_account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +32,6 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         setFragment(new CategoryFragment());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -44,6 +41,17 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        txt_account = findViewById(R.id.account);
+
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+
+        if (b!=null){
+            String j = (String) b.get("Account");
+//            txt_account.setText(j);
+        }
+
     }
 
     @Override
@@ -84,13 +92,13 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home) {
             setFragment(new CategoryFragment());
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_cart) {
+            setFragment(new CartFragment());
+        } else if (id == R.id.nav_time) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_account) {
 
         } else if (id == R.id.nav_share) {
 

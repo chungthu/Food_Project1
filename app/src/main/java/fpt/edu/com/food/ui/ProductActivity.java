@@ -128,7 +128,7 @@ public class ProductActivity extends AppCompatActivity {
                     String name = list.get(0).getName();
 
                     String image = list.get(0).getImage();
-//                    Cart cart = new Cart(name,price_d,b,b,image);
+                    final Cart cart = new Cart(name,price_d,1,price_d,image);
 
 
 //                    String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
@@ -138,7 +138,7 @@ public class ProductActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             DatabaseReference reference = firebaseDatabase.getReference("Cart");
-//                            reference.push().setValue(cart);
+                            reference.push().setValue(cart);
                         }
                     });
 
@@ -162,6 +162,7 @@ public class ProductActivity extends AppCompatActivity {
                 data_Prodcut.removeValue();
             }
         });
+
     }
 
 }

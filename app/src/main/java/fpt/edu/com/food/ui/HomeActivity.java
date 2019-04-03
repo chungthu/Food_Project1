@@ -21,6 +21,7 @@ import android.widget.TextView;
 import fpt.edu.com.food.R;
 import fpt.edu.com.food.fragment.CartFragment;
 import fpt.edu.com.food.fragment.CategoryFragment;
+import fpt.edu.com.food.fragment.TimeOderFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -100,7 +101,7 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_cart) {
             setFragment(new CartFragment());
         } else if (id == R.id.nav_time) {
-
+            setFragment(new TimeOderFragment());
         } else if (id == R.id.nav_account) {
 
         } else if (id == R.id.nav_share) {

@@ -25,6 +25,7 @@ import fpt.edu.com.food.fragment.CategoryFragment;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView txt_account;
+    public String j;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +49,11 @@ public class HomeActivity extends AppCompatActivity
         Bundle b = intent.getExtras();
 
         if (b!=null){
-            String j = (String) b.get("Account");
+            j = (String) b.get("Account");
 //            txt_account.setText(j);
+            Log.e("Tag","Account" + j);
         }
+
 
     }
 
@@ -66,7 +69,6 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
@@ -90,6 +92,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
@@ -112,6 +115,21 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void setFragment(Fragment fragment){
+
+
+        Intent intent = getIntent();
+        Bundle bs = intent.getExtras();
+
+        if (bs!=null){
+            String a = (String) bs.get("Account");
+//            txt_account.setText(j);
+            Log.e("Tag","Account" + a);
+
+            Bundle bundle = new Bundle();
+            bundle.putString("Accounts",a);
+        }
+
+
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_home,fragment);
         ft.commit();

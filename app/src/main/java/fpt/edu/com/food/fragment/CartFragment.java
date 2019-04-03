@@ -44,6 +44,7 @@ public class CartFragment extends Fragment {
     private FirebaseRecyclerOptions<Cart> options;
     private FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter;
     double sum = 0;
+    private String account;
 
 
     public CartFragment() {
@@ -64,6 +65,15 @@ public class CartFragment extends Fragment {
         data_Cart = firebaseDatabase.getReference("Cart");
 
         String id = data_Cart.getRef().getKey();
+
+        Bundle bundle = getArguments();
+
+        if (bundle != null){
+            account = bundle.getString("Accounts");
+            Log.e("Tag","account1" + account);
+
+        }
+        book.setText(account);
 
         data_Cart.addValueEventListener(new ValueEventListener() {
             @Override

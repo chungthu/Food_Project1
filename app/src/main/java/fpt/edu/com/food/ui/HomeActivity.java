@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import fpt.edu.com.food.R;
 import fpt.edu.com.food.fragment.CartFragment;
@@ -27,6 +29,7 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView txt_account;
     public String j;
+    private static FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +55,12 @@ public class HomeActivity extends AppCompatActivity
         if (b!=null){
             j = (String) b.get("Account");
 //            txt_account.setText(j);
-            Log.e("Tag","Account" + j);
         }
 
+        fragmentManager = getSupportFragmentManager();
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -94,12 +98,19 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
 
+
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
             setFragment(new CategoryFragment());
         } else if (id == R.id.nav_cart) {
-            setFragment(new CartFragment());
+
+            Fragment cartFragment = new CartFragment();
+            Bundle data = new Bundle();
+            data.putString("data", "0969004293");
+            cartFragment.setArguments(data);
+            fragmentManager.beginTransaction().replace(R.id.fragment_home, cartFragment).commit();
+
         } else if (id == R.id.nav_time) {
             setFragment(new TimeOderFragment());
         } else if (id == R.id.nav_account) {
@@ -116,21 +127,6 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void setFragment(Fragment fragment){
-
-
-        Intent intent = getIntent();
-        Bundle bs = intent.getExtras();
-
-        if (bs!=null){
-            String a = (String) bs.get("Account");
-//            txt_account.setText(j);
-            Log.e("Tag","Account" + a);
-
-            Bundle bundle = new Bundle();
-            bundle.putString("Accounts",a);
-        }
-
-
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_home,fragment);
         ft.commit();

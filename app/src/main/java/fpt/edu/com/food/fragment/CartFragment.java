@@ -3,9 +3,12 @@ package fpt.edu.com.food.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fpt.edu.com.food.R;
+import fpt.edu.com.food.dialog.LocationDialog;
 import fpt.edu.com.food.model.Cart;
+import fpt.edu.com.food.ui.HomeActivity;
 import fpt.edu.com.food.viewholder.CartViewHolder;
 
 /**
@@ -45,6 +50,7 @@ public class CartFragment extends Fragment {
     private FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter;
     double sum = 0;
     private String account;
+    private LocationDialog dialog;
 
 
     public CartFragment() {
@@ -64,16 +70,11 @@ public class CartFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         data_Cart = firebaseDatabase.getReference("Cart");
 
-        String id = data_Cart.getRef().getKey();
 
-        Bundle bundle = getArguments();
+//        String id = data_Cart.getRef().getKey();
 
-        if (bundle != null){
-            account = bundle.getString("Accounts");
-            Log.e("Tag","account1" + account);
-
-        }
-        book.setText(account);
+        account = getArguments().getString("data");
+        
 
         data_Cart.addValueEventListener(new ValueEventListener() {
             @Override
@@ -88,6 +89,12 @@ public class CartFragment extends Fragment {
         });
 
         loadCart();
+        book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Book();
+            }
+        });
 
         return view;
     }
@@ -151,7 +158,6 @@ public class CartFragment extends Fragment {
 //                        for (double number : list) {
 //                            sum += number;
 //                        }
-
                     }
 
                     @NonNull
@@ -164,6 +170,21 @@ public class CartFragment extends Fragment {
         adapter.startListening();
         reCart.setLayoutManager(new LinearLayoutManager(getContext()));
         reCart.setAdapter(adapter);
+    }
+
+    public void Book(){
+//        Double Totals = Double.parseDouble(Total.getText().toString().trim());
+        String phone = account;
+        Time now = new Time();
+        now.setToNow();
+//        String Location =
+        showEditDialog();
+    }
+
+    private void showEditDialog() {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        dialog = new LocationDialog();
+        dialog.show(fm,"OK");
     }
 
 }

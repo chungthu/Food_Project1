@@ -20,4 +20,5 @@
     <string name="Price">Price</string>
     <string name="Image">Image</string>
     <string name="price">0</string>
+    <string name="Location">Location</string>
 </resources>

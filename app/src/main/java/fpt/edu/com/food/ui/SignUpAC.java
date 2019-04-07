@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import fpt.edu.com.food.R;
 import fpt.edu.com.food.model.User;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpAC extends AppCompatActivity {
 
     private EditText edtUser;
     private EditText edtPassword;
@@ -50,7 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
                     .setValue(user);
             Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(SignUpActivity.this,LoginActivity.class);
+            Intent intent = new Intent(SignUpAC.this, LoginAC.class);
             intent.putExtra("phone",phone);
             intent.putExtra("password",password);
             startActivity(intent);

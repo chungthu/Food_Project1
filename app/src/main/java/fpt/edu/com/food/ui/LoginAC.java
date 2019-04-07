@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,16 +12,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import fpt.edu.com.food.R;
 import fpt.edu.com.food.model.User;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginAC extends AppCompatActivity {
 
     private EditText edtPhone;
     private EditText edtPassword;
@@ -39,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void SignUp(View view) {
-        startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+        startActivity(new Intent(LoginAC.this, SignUpAC.class));
     }
 
     public void Login(View view) {
@@ -48,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         DatabaseReference table_user = database.getReference("User");
         String phone = edtPhone.getText().toString().trim();
 
-        final Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+        final Intent intent = new Intent(LoginAC.this, HomeAC.class);
         intent.putExtra("Account",phone);
 
 
@@ -63,18 +58,18 @@ public class LoginActivity extends AppCompatActivity {
                     //Get user information
                     User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
                     if (user.getPassword().equals(edtPassword.getText().toString().trim())) {
-                        Toast.makeText(LoginActivity.this, "Sign In successfully !", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginAC.this, "Sign In successfully !", Toast.LENGTH_SHORT).show();
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(LoginActivity.this, "Sign In failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginAC.this, "Sign In failed", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
-                    Toast.makeText(LoginActivity.this, "User not exist in Databse", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                    Toast.makeText(LoginAC.this, "User not exist in Databse", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginAC.this, HomeAC.class));
                 }
-//                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+//                startActivity(new Intent(LoginAC.this, HomeAC.class));
             }
 
             @Override

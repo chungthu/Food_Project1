@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.CartAC"></activity>
         <activity
-            android:name=".ui.ProductActivity"
+            android:name=".ui.ProductAC"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,21 +23,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.FoodActivity"
+            android:name=".ui.FoodAC"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.HomeActivity"
+            android:name=".ui.HomeAC"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.SignUpActivity"
+            android:name=".ui.SignUpAC"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.LoginAC"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.MainAC"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

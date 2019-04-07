@@ -6,24 +6,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +25,9 @@ import java.util.List;
 import fpt.edu.com.food.R;
 import fpt.edu.com.food.adapter.ProductAdapter;
 import fpt.edu.com.food.dialog.AddFoodDiaLog;
-import fpt.edu.com.food.model.Category;
 import fpt.edu.com.food.model.Food;
-import fpt.edu.com.food.viewholder.CategoryViewHolder;
-import fpt.edu.com.food.viewholder.FoodViewHolder;
 
-public class FoodActivity extends AppCompatActivity {
+public class FoodAC extends AppCompatActivity {
     private GridView gridView;
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
@@ -104,7 +95,7 @@ public class FoodActivity extends AppCompatActivity {
                     Food food = postSnapshot.getValue(Food.class);
                     list.add(food);
                     String key = postSnapshot.getKey();
-                    Toast.makeText(FoodActivity.this, ""+ key, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FoodAC.this, ""+ key, Toast.LENGTH_SHORT).show();
                 }
                 adapter = new ProductAdapter(getBaseContext(), (ArrayList<Food>) list);
                 gridView.setAdapter(adapter);

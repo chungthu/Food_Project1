@@ -7,7 +7,7 @@ import android.view.View;
 
 import fpt.edu.com.food.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainAC extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void start(View view) {
-        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+        startActivity(new Intent(MainAC.this, LoginAC.class));
     }
 }

@@ -9,7 +9,6 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,8 +26,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import fpt.edu.com.food.R;
@@ -39,7 +36,7 @@ import fpt.edu.com.food.model.Food;
 import fpt.edu.com.food.model.Order;
 import fpt.edu.com.food.sqlDao.OrderDetail;
 
-public class ProductActivity extends AppCompatActivity {
+public class ProductAC extends AppCompatActivity {
 
     private AppBarLayout appBarLayout;
     private CollapsingToolbarLayout collapsing;
@@ -122,7 +119,7 @@ public class ProductActivity extends AppCompatActivity {
                     foodPrice.setText(price_s);
                     foodDescription.setText(list.get(0).getDescription());
 
-                    Picasso.with(ProductActivity.this).load(list.get(0).getImage())
+                    Picasso.with(ProductAC.this).load(list.get(0).getImage())
                             .into(imgProduct);
 
 
@@ -187,9 +184,9 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 orderDetail.insertCart(new Order(
-                    foodid, currentFood.getName(), numberButtom.getNumber(), String.valueOf(currentFood.getPrice()), currentFood.getDescription()
+                    foodid, currentFood.getName(), String.valueOf(numberButtom.getNumber()), String.valueOf(currentFood.getPrice()), currentFood.getDescription()
                 ));
-                Toast.makeText(ProductActivity.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProductAC.this, "Added to Cart", Toast.LENGTH_SHORT).show();
             }
         });
     }

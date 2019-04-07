@@ -24,8 +24,7 @@ import com.squareup.picasso.Picasso;
 
 import fpt.edu.com.food.R;
 import fpt.edu.com.food.model.Category;
-import fpt.edu.com.food.ui.FoodActivity;
-import fpt.edu.com.food.ui.HomeActivity;
+import fpt.edu.com.food.ui.FoodAC;
 import fpt.edu.com.food.viewholder.CategoryViewHolder;
 
 /**
@@ -102,7 +101,7 @@ public class CategoryFragment extends Fragment {
                             @Override
                             public void onClick(View v) {
                                 Toast.makeText(getActivity(), model.getName(), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getActivity(), FoodActivity.class);
+                                Intent intent = new Intent(getActivity(), FoodAC.class);
                                 intent.putExtra("CategoryId",adapter.getRef(position).getKey());
                                 startActivity(intent);
                             }

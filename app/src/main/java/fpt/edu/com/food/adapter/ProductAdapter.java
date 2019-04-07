@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import fpt.edu.com.food.R;
 import fpt.edu.com.food.model.Food;
-import fpt.edu.com.food.ui.ProductActivity;
+import fpt.edu.com.food.ui.ProductAC;
 
 public class ProductAdapter extends BaseAdapter {
 
@@ -69,7 +69,7 @@ public class ProductAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(context, ""+list.get(position).getName(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, ProductActivity.class);
+                    Intent intent = new Intent(context, ProductAC.class);
                     intent.putExtra("namefood",list.get(position).getName());
                     context.startActivity(intent);
                 }

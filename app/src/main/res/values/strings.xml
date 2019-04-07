@@ -21,4 +21,7 @@
     <string name="Image">Image</string>
     <string name="price">0</string>
     <string name="Location">Location</string>
+    <string name="Total">Total:</string>
+    <string name="monny">1000</string>
+    <string name="PlaceOrder">Place Order</string>
 </resources>

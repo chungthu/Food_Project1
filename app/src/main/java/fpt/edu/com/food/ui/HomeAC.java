@@ -25,7 +25,7 @@ import fpt.edu.com.food.fragment.CartFragment;
 import fpt.edu.com.food.fragment.CategoryFragment;
 import fpt.edu.com.food.fragment.TimeOderFragment;
 
-public class HomeActivity extends AppCompatActivity
+public class HomeAC extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView txt_account;
     public String j;
@@ -105,11 +105,11 @@ public class HomeActivity extends AppCompatActivity
             setFragment(new CategoryFragment());
         } else if (id == R.id.nav_cart) {
 
-            Fragment cartFragment = new CartFragment();
-            Bundle data = new Bundle();
-            data.putString("data", "0969004293");
-            cartFragment.setArguments(data);
-            fragmentManager.beginTransaction().replace(R.id.fragment_home, cartFragment).commit();
+//            Fragment cartFragment = new CartFragment();
+//            Bundle data = new Bundle();
+//            data.putString("data", "0969004293");
+//            cartFragment.setArguments(data);
+//            fragmentManager.beginTransaction().replace(R.id.fragment_home, cartFragment).commit();
 
         } else if (id == R.id.nav_time) {
             setFragment(new TimeOderFragment());

@@ -57,68 +57,7 @@ public class FoodActivity extends AppCompatActivity {
         init();
         addFood();
         loadProduct();
-//        loadFood();
-
-//        databaseReference = firebaseDatabase.getReference("Food");
-//
-//        Intent intent = getIntent();
-//        Bundle ids = intent.getExtras();
-//
-//        String id_Category = String.valueOf(ids.get("CategoryId"));
-//        id = databaseReference.orderByChild("id").equalTo(id_Category);
-
-//        id.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                loadFood();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
-
     }
-
-//    private void loadFood() {
-//
-//
-//        options =
-//                new FirebaseRecyclerOptions.Builder<Food>()
-//                        .setQuery(id,Food.class)
-//                        .build();
-//
-//        adapter =
-//                new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
-//                    @Override
-//                    protected void onBindViewHolder(@NonNull FoodViewHolder holder, int position, @NonNull Food model) {
-//                        holder.nameItemfood.setText(model.getName());
-//                        holder.priceItemfood.setText(String.valueOf(model.getPrice())+ "$");
-//                    }
-//
-//                    @NonNull
-//                    @Override
-//                    public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-//                        View view = LayoutInflater.from(FoodActivity.this).inflate(R.layout.item_food,viewGroup,false);
-//                        return new FoodViewHolder(view);
-//                    }
-//
-//                };
-//        adapter.startListening();
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(adapter);
-//
-//    }
-
-//    @Override
-//    protected void onStop() {
-//        if (adapter != null){
-//            adapter.stopListening();
-//        }
-//        super.onStop();
-//    }
 
     public void init(){
         gridView = findViewById(R.id.gv_food);
@@ -164,10 +103,13 @@ public class FoodActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Food food = postSnapshot.getValue(Food.class);
                     list.add(food);
+                    String key = postSnapshot.getKey();
+                    Toast.makeText(FoodActivity.this, ""+ key, Toast.LENGTH_SHORT).show();
                 }
                 adapter = new ProductAdapter(getBaseContext(), (ArrayList<Food>) list);
-
                 gridView.setAdapter(adapter);
+
+
 
             }
 

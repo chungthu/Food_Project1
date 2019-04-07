@@ -32,8 +32,12 @@ import java.util.Date;
 import java.util.List;
 
 import fpt.edu.com.food.R;
+import fpt.edu.com.food.database.Database;
+import fpt.edu.com.food.database.DatabaseHelper;
 import fpt.edu.com.food.model.Cart;
 import fpt.edu.com.food.model.Food;
+import fpt.edu.com.food.model.Order;
+import fpt.edu.com.food.sqlDao.OrderDetail;
 
 public class ProductActivity extends AppCompatActivity {
 
@@ -52,6 +56,11 @@ public class ProductActivity extends AppCompatActivity {
     private DatabaseReference data_Prodcut;
     private DatabaseReference data_Cart;
     private List<Food> list;
+    private Food currentFood;
+    private String foodid;
+    private Database database;
+    private DatabaseHelper databaseHelper;
+    private OrderDetail orderDetail;
 
 
     @Override
@@ -62,6 +71,9 @@ public class ProductActivity extends AppCompatActivity {
         loaiProduct();
 //        number();
 //        remove();
+        order();
+
+        Toast.makeText(this, ""+ foodid, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -80,12 +92,15 @@ public class ProductActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         data_Prodcut = firebaseDatabase.getReference("Food");
         list = new ArrayList<>();
+        databaseHelper = new DatabaseHelper(this);
+        orderDetail = new OrderDetail(databaseHelper);
+
     }
 
     public void loaiProduct(){
 
         Intent intent = getIntent();
-        Bundle ids = intent.getExtras();
+        final Bundle ids = intent.getExtras();
 
         final String name_food = String.valueOf(ids.get("namefood"));
         Log.e("Tag","Namesss " + name_food);
@@ -96,8 +111,10 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Food food = postSnapshot.getValue(Food.class);
-                    list.add(food);
+                    currentFood = postSnapshot.getValue(Food.class);
+                    list.add(currentFood);
+
+                    foodid = postSnapshot.getKey();
 
                     foodName.setText(list.get(0).getName());
                     final double price_d = list.get(0).getPrice();
@@ -130,19 +147,19 @@ public class ProductActivity extends AppCompatActivity {
                     String image = list.get(0).getImage();
                     final Cart cart = new Cart(name,price_d,1,price_d,image);
 
-
 //                    String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 //                    Log.e("Tag", "Time "+ mydate);
 
-                    btnCart.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            DatabaseReference reference = firebaseDatabase.getReference("Cart");
-                            reference.push().setValue(cart);
-                        }
-                    });
+//                    btnCart.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            DatabaseReference reference = firebaseDatabase.getReference("Cart");
+//                            reference.push().setValue(cart);
+//                        }
+//                    });
 
                 }
+                Log.e("Tag","ID" + foodid);
 
             }
 
@@ -163,6 +180,18 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void order(){
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderDetail.insertCart(new Order(
+                    foodid, currentFood.getName(), numberButtom.getNumber(), String.valueOf(currentFood.getPrice()), currentFood.getDescription()
+                ));
+                Toast.makeText(ProductActivity.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

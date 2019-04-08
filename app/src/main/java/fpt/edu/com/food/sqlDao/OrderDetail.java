@@ -10,7 +10,6 @@ import java.util.List;
 import fpt.edu.com.food.Contrants;
 import fpt.edu.com.food.database.DatabaseHelper;
 import fpt.edu.com.food.model.Order;
-import fpt.edu.com.food.model.User;
 
 public class OrderDetail implements Contrants {
     private DatabaseHelper databaseHelper;
@@ -29,6 +28,7 @@ public class OrderDetail implements Contrants {
         values.put(COLUMN_PRODUCT_NAME,order.getProductName());
         values.put(COLUMN_QUANTITY,order.getQuantity());
         values.put(COLUMN_PRICE,order.getPrice());
+        values.put(COLUMN_PRODUCT_IMAGE,order.getImage());
         values.put(COLUMN_DISCOUNT,order.getDiscount());
 
         sqLiteDatabase.insert(TABLE_ORDER_DETAIL,null,values);
@@ -53,6 +53,7 @@ public class OrderDetail implements Contrants {
                 String name = cursor.getString(cursor.getColumnIndex(COLUMN_PRODUCT_NAME));
                 String quantity = cursor.getString(cursor.getColumnIndex(COLUMN_QUANTITY));
                 String price = cursor.getString(cursor.getColumnIndex(COLUMN_PRICE));
+                String image = cursor.getString(cursor.getColumnIndex(COLUMN_PRODUCT_IMAGE));
                 String discount = cursor.getString(cursor.getColumnIndex(COLUMN_DISCOUNT));
 
                 Order order = new Order();
@@ -60,6 +61,7 @@ public class OrderDetail implements Contrants {
                 order.productName = name;
                 order.quantity = quantity;
                 order.price = price;
+                order.image = image;
                 order.discount = discount;
 
                 orderList.add(order);
@@ -74,7 +76,14 @@ public class OrderDetail implements Contrants {
 
     public void delete(){
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        String query = String.format("DELETE FROM OrderDetail");
-        db.execSQL(query);
+        db.delete(TABLE_ORDER_DETAIL,"1",null);
+        db.close();
+    }
+
+    public void deleteID(String name){
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+        db.delete(TABLE_ORDER_DETAIL, COLUMN_PRODUCT_ID + " = ?",
+                new String[]{String.valueOf(name)});
+        db.close();
     }
 }

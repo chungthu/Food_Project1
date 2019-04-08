@@ -7,6 +7,7 @@ public interface Contrants {
     String COLUMN_PRODUCT_NAME = "ProductName";
     String COLUMN_QUANTITY = "Quantity";
     String COLUMN_PRICE= "Price";
+    String COLUMN_PRODUCT_IMAGE = "Image";
     String COLUMN_DISCOUNT = "Discount";
 
     String CREATE_TABLE_ORDER_DETAIL = "CREATE TABLE " + TABLE_ORDER_DETAIL + " (" +
@@ -15,6 +16,7 @@ public interface Contrants {
             COLUMN_PRODUCT_NAME + " TEXT," +
             COLUMN_QUANTITY + " TEXT,"+
             COLUMN_PRICE + " TEXT,"+
+            COLUMN_PRODUCT_IMAGE+ " TEXT,"+
             COLUMN_DISCOUNT + " TEXT"
             + ")";
 }

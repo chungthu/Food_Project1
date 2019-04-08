@@ -184,7 +184,7 @@ public class ProductAC extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 orderDetail.insertCart(new Order(
-                    foodid, currentFood.getName(), String.valueOf(numberButtom.getNumber()), String.valueOf(currentFood.getPrice()), currentFood.getDescription()
+                    foodid, currentFood.getName(), String.valueOf(numberButtom.getNumber()), String.valueOf(currentFood.getPrice()),currentFood.getImage(), currentFood.getDescription()
                 ));
                 Toast.makeText(ProductAC.this, "Added to Cart", Toast.LENGTH_SHORT).show();
             }

@@ -5,16 +5,18 @@ public class Order {
     public String productName;
     public String quantity;
     public String price;
+    public String image;
     public String discount;
 
     public Order() {
     }
 
-    public Order(String productId, String productName, String quantity, String price, String discount) {
+    public Order(String productId, String productName, String quantity, String price, String image, String discount) {
         this.productId = productId;
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
+        this.image = image;
         this.discount = discount;
     }
 
@@ -48,6 +50,14 @@ public class Order {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDiscount() {

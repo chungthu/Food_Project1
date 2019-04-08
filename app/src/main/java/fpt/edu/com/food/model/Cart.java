@@ -1,6 +1,5 @@
 package fpt.edu.com.food.model;
 
-import java.util.Date;
 
 public class Cart {
     String namefood;

@@ -28,8 +28,9 @@ import fpt.edu.com.food.fragment.TimeOderFragment;
 public class HomeAC extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView txt_account;
-    public String j;
     private static FragmentManager fragmentManager;
+
+    public static String j ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +99,6 @@ public class HomeAC extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
 
-
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
@@ -110,6 +110,9 @@ public class HomeAC extends AppCompatActivity
 //            data.putString("data", "0969004293");
 //            cartFragment.setArguments(data);
 //            fragmentManager.beginTransaction().replace(R.id.fragment_home, cartFragment).commit();
+            Intent intent1 = new Intent(HomeAC.this, CartAC.class);
+            intent1.putExtra("Account", j);
+            startActivity(intent1);
 
         } else if (id == R.id.nav_time) {
             setFragment(new TimeOderFragment());

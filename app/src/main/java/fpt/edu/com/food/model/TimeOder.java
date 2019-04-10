@@ -1,42 +1,36 @@
 package fpt.edu.com.food.model;
 
 public class TimeOder {
-    String time;
-    String location;
-    double total;
+    String addres;
+    String total;
     String phone;
+    String satus;
+    String date;
 
     public TimeOder() {
     }
 
-    public TimeOder(String time, String location, double total, String number) {
-        this.time = time;
-        this.location = location;
+    public TimeOder(String addres, String total, String phone, String satus, String date) {
+        this.addres = addres;
         this.total = total;
-        this.phone = number;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+        this.phone = phone;
+        this.satus = satus;
+        this.date = date;
     }
 
     public String getLocation() {
-        return location;
+        return addres;
     }
 
     public void setLocation(String location) {
-        this.location = location;
+        this.addres = location;
     }
 
-    public double getTotal() {
+    public String getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(String total) {
         this.total = total;
     }
 
@@ -46,5 +40,21 @@ public class TimeOder {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getSatus() {
+        return satus;
+    }
+
+    public void setSatus(String satus) {
+        this.satus = satus;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

@@ -7,19 +7,19 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home" />
+            android:title="@string/HC_Home" />
         <item
             android:id="@+id/nav_cart"
             android:icon="@drawable/ic_shopping_cart_black_24dp"
-            android:title="Cart" />
+            android:title="@string/HC_Cart" />
         <item
             android:id="@+id/nav_time"
             android:icon="@drawable/ic_access_time_black_24dp"
-            android:title="History" />
+            android:title="@string/HC_History" />
         <item
             android:id="@+id/nav_account"
             android:icon="@drawable/ic_account_circle_black_24dp"
-            android:title="Account" />
+            android:title="@string/HC_Account" />
     </group>
 
     <item android:title="Communicate">
@@ -27,11 +27,11 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/HC_Share" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="@string/HC_Send" />
         </menu>
     </item>
 

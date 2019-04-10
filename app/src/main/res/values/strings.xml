@@ -1,10 +1,32 @@
 <resources>
     <string name="app_name">Food</string>
-    <string name="app_names">Restaurant</string>
-    <string name="app_pizza">cheeza pizza</string>
-    <string name="startoder"><![CDATA[Start Oder  >]]></string>
-    <string name="SignUp">Sign Up</string>
-    <string name="Login">Login</string>
+
+    <!--String on MainAC-->
+    <string name="main_app_names">Restaurant</string>
+    <string name="main_app_pizza">cheeza pizza</string>
+    <string name="main_startoder"><![CDATA[Start Oder  >]]></string>
+
+
+
+    <!--String on LoginAC-->
+    <string name="LG_phone">Phone</string>
+    <string name="LG_Password">Password</string>
+    <string name="LG_SignUp">Sign Up</string>
+    <string name="LG_Login">LOGIN</string>
+    <string name="LG_phone_demo">0969004293</string>
+    <string name="LG_Password_Demo">Chungthu</string>
+
+
+
+    <!--String on LoginAC-->
+    <string name="SU_SignUp">Sign Up</string>
+    <string name="SU_Phone">Phone</string>
+    <string name="SU_Pasword">Password</string>
+    <string name="SU_RePassword">Re_enter Password</string>
+
+
+
+    <!--String on HomeAC-->
     <string name="entry">Forced Data Entry</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -12,10 +34,30 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="HC_Home">Home</string>
+    <string name="HC_Cart">Cart</string>
+    <string name="HC_History">History</string>
+    <string name="HC_Account">Account</string>
+    <string name="HC_Share">Share</string>
+    <string name="HC_Send">Send</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
+
+    <!--String on CategoryFragment-->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+    <!--String on ProductAC-->
+    <string name="FoodAC_app_pizza">Pizza</string>
+    <string name="FoodAC_Success">Added to Cart</string>
+
+
+    <!--String on CartAC-->
+    <string name="CartAC_Thank">Thanh You, Order Place</string>
+
+
+    <!--Data demo item-->
     <string name="desctiption">Description</string>
     <string name="Price">Price</string>
     <string name="Image">Image</string>
@@ -24,4 +66,8 @@
     <string name="Total">Total:</string>
     <string name="monny">1000</string>
     <string name="PlaceOrder">Place Order</string>
+    <string name="Placed">PLACED</string>
+    <string name="Book">Book</string>
+    <string name="Review">Review</string>
+    <string name="dola">$</string>
 </resources>

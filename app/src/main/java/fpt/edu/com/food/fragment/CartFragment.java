@@ -123,7 +123,6 @@ public class CartFragment extends Fragment {
                                 .into(holder.imgItemCart);
 
 
-//                        holder.nbtnItemCart.setNumber(amount);
 
                         holder.imgItemCartclear.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -143,19 +142,11 @@ public class CartFragment extends Fragment {
                         List list = new ArrayList();
                         list.add(model.getTotal());
 
-//                        for (int i = 0; i< list.size(); i++){
-//                            sum = sum + list.get(i);
-//                        }
-//
-////
                         Double a = (Double) list.get(0);
                         sum = sum +  a;
 
 
                         Total.setText("Total: "+ String.valueOf(sum)+" $");
-//                        for (double number : list) {
-//                            sum += number;
-//                        }
                     }
 
                     @NonNull

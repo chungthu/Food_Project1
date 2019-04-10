@@ -13,7 +13,8 @@
             android:src="@drawable/mainactivity"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:contentDescription="TODO" />
 
         <LinearLayout
             android:layout_alignParentLeft="true"
@@ -28,6 +29,7 @@
 
             <EditText
                 android:id="@+id/edt_user"
+                android:hint="@string/SU_Phone"
                 android:textSize="35sp"
                 android:textColor="@android:color/background_light"
                 android:layout_width="match_parent"
@@ -36,6 +38,7 @@
 
             <EditText
                 android:id="@+id/edt_password"
+                android:hint="@string/SU_Pasword"
                 android:textSize="35sp"
                 android:layout_marginTop="6dp"
                 android:textColor="@android:color/background_light"
@@ -45,6 +48,7 @@
 
             <EditText
                 android:id="@+id/edt_repassword"
+                android:hint="@string/SU_RePassword"
                 android:textSize="35sp"
                 android:layout_marginTop="6dp"
                 android:textColor="@android:color/background_light"
@@ -63,7 +67,7 @@
 
             <Button
                 android:onClick="SignUp"
-                android:text="@string/SignUp"
+                android:text="@string/SU_SignUp"
                 android:textColor="@android:color/background_light"
                 android:textSize="20sp"
                 android:background="@drawable/bg_start"

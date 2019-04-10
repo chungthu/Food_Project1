@@ -19,7 +19,8 @@
             android:id="@+id/image_itemfood"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:contentDescription="TODO" />
 
         <LinearLayout
             android:layout_weight="2.5"
@@ -34,7 +35,7 @@
                 android:id="@+id/name_itemfood"
                 android:textSize="20sp"
                 android:textAllCaps="true"
-                android:text="@string/app_pizza"
+                android:text="@string/app_name"
                 android:textColor="@android:color/background_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -44,7 +45,8 @@
                 android:layout_gravity="left"
                 android:src="@drawable/sao"
                 android:layout_width="100dp"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:contentDescription="TODO" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,12 +62,12 @@
                         android:id="@+id/txt_reviewPruct"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="378"/>
+                        android:text="@string/price"/>
                     <TextView
                         android:layout_marginLeft="6dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Reviews"/>
+                        android:text="@string/Review"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -78,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:text="100$" />
+                        android:text="@string/price" />
                 </LinearLayout>
 
             </LinearLayout>

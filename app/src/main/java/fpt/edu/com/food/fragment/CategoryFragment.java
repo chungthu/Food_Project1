@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +55,6 @@ public class CategoryFragment extends Fragment {
         databaseReference = firebaseDatabase.getReference("Category");
 
         String id = databaseReference.getRef().getKey();
-        Log.e("Tag","id1 "+id);
 
 //        postCategory();
 
@@ -100,7 +98,6 @@ public class CategoryFragment extends Fragment {
                         holder.card_Category.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(getActivity(), model.getName(), Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getActivity(), FoodAC.class);
                                 intent.putExtra("CategoryId",adapter.getRef(position).getKey());
                                 startActivity(intent);

@@ -9,7 +9,6 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -100,10 +99,8 @@ public class ProductAC extends AppCompatActivity {
         final Bundle ids = intent.getExtras();
 
         final String name_food = String.valueOf(ids.get("namefood"));
-        Log.e("Tag","Namesss " + name_food);
 
         final Query products = data_Prodcut.orderByChild("name").equalTo(name_food);
-        Log.e("Tag", "sfdsf"+ products.getRef().getKey());
         products.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -134,7 +131,6 @@ public class ProductAC extends AppCompatActivity {
                             String c = String.valueOf(b);
 
                             foodPrice.setText(c);
-                            Log.e("Tag","nums"+num);
 
                         }
                     });
@@ -156,7 +152,6 @@ public class ProductAC extends AppCompatActivity {
 //                    });
 
                 }
-                Log.e("Tag","ID" + foodid);
 
             }
 
@@ -186,7 +181,7 @@ public class ProductAC extends AppCompatActivity {
                 orderDetail.insertCart(new Order(
                     foodid, currentFood.getName(), String.valueOf(numberButtom.getNumber()), String.valueOf(currentFood.getPrice()),currentFood.getImage(), currentFood.getDescription()
                 ));
-                Toast.makeText(ProductAC.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProductAC.this, R.string.FoodAC_Success, Toast.LENGTH_SHORT).show();
             }
         });
     }

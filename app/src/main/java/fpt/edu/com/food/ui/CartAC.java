@@ -18,7 +18,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -77,18 +79,23 @@ public class CartAC extends AppCompatActivity {
         dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String strDate = sdf.format(c.getTime());
                 Request request = new Request(
                         account,
                         edtAddress.getText().toString(),
                         txt_Total.getText().toString(),
-                        cart
+                        cart,
+                        strDate
                 );
 
                 requests.child(String.valueOf(System.currentTimeMillis()))
                         .setValue(request);
 
                 order.delete();
-                Toast.makeText(CartAC.this, "Thanh You, Order Place", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CartAC.this,R.string.CartAC_Thank, Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

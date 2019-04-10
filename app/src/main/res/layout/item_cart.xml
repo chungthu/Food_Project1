@@ -18,7 +18,8 @@
             android:layout_weight="1"
             android:src="@drawable/pizza"
             android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:contentDescription="TODO" />
 
         <LinearLayout
             android:layout_weight="3"
@@ -29,7 +30,7 @@
 
             <TextView
                 android:id="@+id/name_itemCart"
-                android:text="@string/app_pizza"
+                android:text="@string/app_name"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/background_dark"
@@ -51,7 +52,7 @@
                 android:id="@+id/txt_itemCart"
                 android:layout_width="match_parent"
                 android:layout_marginTop="5dp"
-                android:text="@string/app_pizza"
+                android:text="@string/app_name"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 android:layout_height="wrap_content" />
@@ -66,7 +67,8 @@
                 android:id="@+id/img_itemCartclear"
                 android:src="@drawable/ic_clear_black_24dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
 

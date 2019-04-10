@@ -55,8 +55,9 @@ public class HomeAC extends AppCompatActivity
 
         if (b!=null){
             j = (String) b.get("Account");
-//            txt_account.setText(j);
         }
+
+//        txt_account.setText(j);
 
         fragmentManager = getSupportFragmentManager();
 
@@ -115,7 +116,9 @@ public class HomeAC extends AppCompatActivity
             startActivity(intent1);
 
         } else if (id == R.id.nav_time) {
-            setFragment(new TimeOderFragment());
+            Intent intent1 = new Intent(HomeAC.this, TimeOrderAC.class);
+            intent1.putExtra("Account", j);
+            startActivity(intent1);
         } else if (id == R.id.nav_account) {
 
         } else if (id == R.id.nav_share) {

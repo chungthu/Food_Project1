@@ -13,7 +13,8 @@
             android:src="@drawable/mainactivity"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:contentDescription="TODO" />
 
         <LinearLayout
             android:layout_alignParentLeft="true"
@@ -27,22 +28,24 @@
             android:padding="6dp">
 
             <EditText
+                android:hint="@string/LG_phone"
                 android:id="@+id/edt_user"
                 android:textSize="35sp"
                 android:textColor="@android:color/background_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0969004293"
+                android:text="@string/LG_phone_demo"
                 android:inputType="phone"/>
 
             <EditText
+                android:hint="@string/LG_Password"
                 android:id="@+id/edt_password"
                 android:textSize="35sp"
                 android:layout_marginTop="6dp"
                 android:textColor="@android:color/background_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chungthu"
+                android:text="@string/LG_Password_Demo"
                 android:inputType="textPassword"/>
 
         </LinearLayout>
@@ -56,7 +59,7 @@
 
             <Button
                 android:onClick="SignUp"
-                android:text="@string/SignUp"
+                android:text="@string/LG_SignUp"
                 android:textColor="@android:color/background_light"
                 android:textSize="20sp"
                 android:background="@drawable/bg_start"
@@ -67,7 +70,7 @@
 
             <Button
                 android:onClick="Login"
-                android:text="@string/Login"
+                android:text="@string/LG_Login"
                 android:textColor="@android:color/background_light"
                 android:textSize="20sp"
                 android:background="@drawable/bg_start"

@@ -7,15 +7,17 @@ public class Request {
     private String addres;
     private String total;
     private List<Order> foods;
+    private String date;
 
     public Request() {
     }
 
-    public Request(String phone, String addres, String total, List<Order> foods) {
+    public Request(String phone, String addres, String total, List<Order> foods, String date) {
         this.phone = phone;
         this.addres = addres;
         this.total = total;
         this.foods = foods;
+        this.date = date;
     }
 
     public String getPhone() {
@@ -48,5 +50,13 @@ public class Request {
 
     public void setFoods(List<Order> foods) {
         this.foods = foods;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

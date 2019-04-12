@@ -14,6 +14,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import fpt.edu.com.food.R;
 import fpt.edu.com.food.model.TimeOder;
@@ -26,6 +27,7 @@ public class TimeOrderAC extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseRecyclerOptions<TimeOder> options;
     private FirebaseRecyclerAdapter<TimeOder, TimeViewHolder> adapter;
+    private Query query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class TimeOrderAC extends AppCompatActivity {
     private void loadTimeOrder() {
         options =
                 new FirebaseRecyclerOptions.Builder<TimeOder>()
-                .setQuery(databaseReference.orderByChild("phone").equalTo(account),TimeOder.class)
+                .setQuery(query,TimeOder.class)
                 .build();
 
         adapter =
@@ -84,5 +86,7 @@ public class TimeOrderAC extends AppCompatActivity {
         if (bundle != null){
             account = (String) bundle.get("Account");
         }
+
+        query = databaseReference.orderByChild("phone").equalTo(account);
     }
 }

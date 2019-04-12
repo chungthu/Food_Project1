@@ -26,14 +26,15 @@ public class CartAdapter extends RecyclerView.Adapter<Cart1ViewHolder> {
 
     private Context context;
     private List<Order> list;
-    private DatabaseHelper databaseHelper = new DatabaseHelper(context);
-    private OrderDetail orderDetail = new OrderDetail(databaseHelper);
+    private DatabaseHelper databaseHelper;
+    private OrderDetail orderDetail;
 
 
-    public CartAdapter(Context contet, List<Order> list) {
-        this.context = contet;
+    public CartAdapter(Context context, List<Order> list) {
+        this.context = context;
         this.list = list;
     }
+
 
     @NonNull
     @Override
@@ -44,6 +45,8 @@ public class CartAdapter extends RecyclerView.Adapter<Cart1ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull Cart1ViewHolder holder, final int i) {
+        databaseHelper = new DatabaseHelper(context);
+        orderDetail = new OrderDetail(databaseHelper);
         holder.txt_item_cart_name.setText(list.get(i).getProductName());
 //        holder.txt_item_cart_price.setText("$ "+ list.get(i).price);
 
@@ -58,12 +61,15 @@ public class CartAdapter extends RecyclerView.Adapter<Cart1ViewHolder> {
         Picasso.with(context).load(list.get(i).getImage())
                 .into(holder.img_item_cart1);
 
-//        holder.img_delete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                orderDetail.deleteID(list.get(i).getProductName());
-//            }
-//        });
+        holder.img_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderDetail.deleteID(list.get(i).productName);
+                notifyDataSetChanged();
+                list.remove(i);
+            }
+        });
+
 
     }
 

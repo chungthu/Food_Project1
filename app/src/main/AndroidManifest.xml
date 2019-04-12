@@ -12,8 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.TimeOrderAC" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.CartAC" android:screenOrientation="portrait" />
+        <activity android:name=".ui.ADAccoutAC"></activity>
+        <activity android:name=".ui.AccountAC" />
+        <activity android:name=".ui.ADCartAC" />
+        <activity android:name=".ui.ADCategoryAC" />
+        <activity android:name=".ui.ADFoodAC" />
+        <activity
+            android:name=".ui.TimeOrderAC"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.CartAC"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ProductAC"
             android:screenOrientation="portrait">

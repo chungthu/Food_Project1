@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 import fpt.edu.com.food.R;
 import fpt.edu.com.food.model.User;
 
@@ -46,14 +48,18 @@ public class SignUpAC extends AppCompatActivity {
         }if (repassword.equals(password)){
             User user = new User(phone,password);
 
-            databaseReference.push()
-                    .setValue(user);
+            HashMap<String, Object> result = new HashMap<>();
+            result.put("password", password);
+
+            FirebaseDatabase.getInstance().getReference().child("User").child(phone).updateChildren(result);
+
             Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(SignUpAC.this, LoginAC.class);
             intent.putExtra("phone",phone);
             intent.putExtra("password",password);
             startActivity(intent);
+            finish();
         }else {
             Toast.makeText(this, "The Re_enter Password does not match the Password ", Toast.LENGTH_SHORT).show();
         }

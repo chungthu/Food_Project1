@@ -7,7 +7,6 @@
     <string name="main_startoder"><![CDATA[Start Oder  >]]></string>
 
 
-
     <!--String on LoginAC-->
     <string name="LG_phone">Phone</string>
     <string name="LG_Password">Password</string>
@@ -17,13 +16,11 @@
     <string name="LG_Password_Demo">Chungthu</string>
 
 
-
     <!--String on LoginAC-->
     <string name="SU_SignUp">Sign Up</string>
     <string name="SU_Phone">Phone</string>
     <string name="SU_Pasword">Password</string>
     <string name="SU_RePassword">Re_enter Password</string>
-
 
 
     <!--String on HomeAC-->
@@ -42,10 +39,8 @@
     <string name="HC_Send">Send</string>
 
 
-
     <!--String on CategoryFragment-->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 
     <!--String on ProductAC-->
@@ -70,4 +65,9 @@
     <string name="Book">Book</string>
     <string name="Review">Review</string>
     <string name="dola">$</string>
+    <string name="HC_Category">Category</string>
+    <string name="HC_Food">Food</string>
+    <string name="HC_Statistic">Statistic</string>
+    <string name="Order">Order</string>
+    <string name="RePassword">Change Password</string>
 </resources>

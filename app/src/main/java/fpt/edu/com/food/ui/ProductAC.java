@@ -182,6 +182,7 @@ public class ProductAC extends AppCompatActivity {
                     foodid, currentFood.getName(), String.valueOf(numberButtom.getNumber()), String.valueOf(currentFood.getPrice()),currentFood.getImage(), currentFood.getDescription()
                 ));
                 Toast.makeText(ProductAC.this, R.string.FoodAC_Success, Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

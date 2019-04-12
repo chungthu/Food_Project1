@@ -31,7 +31,7 @@ public class FoodAC extends AppCompatActivity {
     private GridView gridView;
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
-    private AddFoodDiaLog addFoodDiaLog;
+//    private AddFoodDiaLog addFoodDiaLog;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private List<Food> list;
@@ -46,15 +46,14 @@ public class FoodAC extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
         init();
-        addFood();
+//        addFood();
         loadProduct();
     }
 
     public void init(){
         gridView = findViewById(R.id.gv_food);
 //        recyclerView = findViewById(R.id.RE_Food);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        addFoodDiaLog = new AddFoodDiaLog();
+//        addFoodDiaLog = new AddFoodDiaLog();
         firebaseDatabase = FirebaseDatabase.getInstance();
 //        adapter = new ProductAdapter(this, (ArrayList<Food>) list);
 }
@@ -70,7 +69,7 @@ public class FoodAC extends AppCompatActivity {
 
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        addFoodDiaLog.show(fm,"OK");
+//        addFoodDiaLog.show(fm,"OK");
         adapter.notifyDataSetChanged();
         gridView.clearFocus();
     }

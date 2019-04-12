@@ -12,6 +12,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import fpt.edu.com.food.R;
@@ -41,6 +42,7 @@ public class LoginAC extends AppCompatActivity {
         init();
         database = FirebaseDatabase.getInstance();
         DatabaseReference table_user = database.getReference("User");
+        Query query = table_user.orderByChild("phone").equalTo(edtPhone.getText().toString());
         String phone = edtPhone.getText().toString().trim();
 
         final Intent intent = new Intent(LoginAC.this, HomeAC.class);
@@ -67,7 +69,7 @@ public class LoginAC extends AppCompatActivity {
 
                 } else {
                     Toast.makeText(LoginAC.this, "User not exist in Databse", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginAC.this, HomeAC.class));
+//                    startActivity(new Intent(LoginAC.this, HomeAC.class));
                 }
 //                startActivity(new Intent(LoginAC.this, HomeAC.class));
             }
@@ -78,7 +80,7 @@ public class LoginAC extends AppCompatActivity {
             }
         });
 
-        startActivity(intent);
+//        startActivity(intent);
 
     }
 

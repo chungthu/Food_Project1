@@ -75,15 +75,15 @@ public class OrderDetail implements Contrants {
     }
 
     public void delete(){
-        SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        db.delete(TABLE_ORDER_DETAIL,"1",null);
-        db.close();
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_ORDER_DETAIL,"1",null);
+        sqLiteDatabase.close();
     }
 
-    public void deleteID(String name){
-        SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        db.delete(TABLE_ORDER_DETAIL, COLUMN_PRODUCT_ID + " = ?",
-                new String[]{String.valueOf(name)});
-        db.close();
+    public void deleteID(String id){
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_ORDER_DETAIL, COLUMN_PRODUCT_NAME + " = ?",
+                new String[]{String.valueOf(id)});
+        sqLiteDatabase.close();
     }
 }

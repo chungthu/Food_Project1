@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="6dp"
+    android:background="@drawable/dororo"
+    android:orientation="vertical"
+    tools:context=".ui.AccountAC">
+
+    <ImageView
+        android:layout_marginTop="12dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/account"
+        android:layout_width="150dp"
+        android:layout_height="150dp" />
+
+    <TextView
+        android:id="@+id/txt_account_phone"
+        android:layout_marginTop="6dp"
+        android:textSize="30sp"
+        android:textColor="@android:color/background_light"
+        android:gravity="center"
+        android:text="@string/HC_Share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:onClick="Password"
+        android:layout_marginTop="6dp"
+        android:drawableLeft="@drawable/selfkey"
+        android:text="@string/RePassword"
+        android:textColor="@android:color/background_light"
+        android:background="@drawable/bg_tem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

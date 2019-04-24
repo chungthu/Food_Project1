@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView android:id="@+id/cardview_Category"
+<android.support.v7.widget.CardView
+    android:id="@+id/cardview_Category"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     app:cardCornerRadius="6dp"

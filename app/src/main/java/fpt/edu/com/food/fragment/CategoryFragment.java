@@ -39,9 +39,6 @@ public class CategoryFragment extends Fragment {
     private FirebaseRecyclerAdapter<Category, CategoryViewHolder> adapter;
 
 
-    public CategoryFragment() {
-        // Required empty public constructor
-    }
 
 
     @Override
@@ -54,34 +51,33 @@ public class CategoryFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Category");
 
-        String id = databaseReference.getRef().getKey();
 
 //        postCategory();
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                displayCategory();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                displayCategory();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
         displayCategory();
 
 
         return view;
     }
 
-    @Override
-    public void onStop() {
-        if (adapter != null){
-            adapter.stopListening();
-        }
-        super.onStop();
-    }
+//    @Override
+//    public void onStop() {
+//        if (adapter != null){
+//            adapter.stopListening();
+//        }
+//        super.onStop();
+//    }
 
     public void displayCategory(){
         options =

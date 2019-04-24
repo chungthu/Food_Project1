@@ -70,4 +70,8 @@
     <string name="HC_Statistic">Statistic</string>
     <string name="Order">Order</string>
     <string name="RePassword">Change Password</string>
+    <string name="Update">Update</string>
+    <string name="Delete">Delete</string>
+    <string name="updateCateogry">Update Category</string>
+    <string name="updateFood">Update Food</string>
 </resources>

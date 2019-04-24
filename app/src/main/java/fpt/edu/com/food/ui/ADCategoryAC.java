@@ -1,16 +1,22 @@
 package fpt.edu.com.food.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -36,6 +42,7 @@ public class ADCategoryAC extends AppCompatActivity {
     private FirebaseRecyclerAdapter<Category, CategoryViewHolder> adapter;
     private FloatingActionButton fab;
     private AddCategoryDialog dialog;
+    private EditText updatename, updateiamge;
 
 
     @Override
@@ -61,13 +68,6 @@ public class ADCategoryAC extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onStop() {
-        if (adapter != null){
-            adapter.stopListening();
-        }
-        super.onStop();
-    }
 
     public void displayCategory(){
         options =
@@ -77,7 +77,8 @@ public class ADCategoryAC extends AppCompatActivity {
         adapter =
                 new FirebaseRecyclerAdapter<Category, CategoryViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull CategoryViewHolder holder, final int position, @NonNull final Category model) {
+                    protected void onBindViewHolder(@NonNull CategoryViewHolder holder,
+                                                    final int position, @NonNull final Category model) {
                         holder.txt_Category.setText(model.getName());
                         Picasso.with(ADCategoryAC.this).load(model.getImage())
                                 .into(holder.img_Category);
@@ -89,6 +90,7 @@ public class ADCategoryAC extends AppCompatActivity {
                                 startActivity(intent);
                             }
                         });
+
                     }
 
                     @NonNull
@@ -119,8 +121,66 @@ public class ADCategoryAC extends AppCompatActivity {
         dialog.show(fm,"OK");
         adapter.notifyDataSetChanged();
         recyclerView.clearFocus();
-
     }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case 1:
+//                adapter.UpdateAccount(item.getGroupId());
+                showUpdateDialog(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
+                adapter.notifyDataSetChanged();
+                return true;
+            case 2:
+//                adapter.removeItem(item.getGroupId());
+                    removedata(item.getGroupId());
+//                Toast.makeText(this, ""+adapter.getRef(item.getOrder()).getKey(), Toast.LENGTH_SHORT).show();
+                    adapter.notifyDataSetChanged();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    private void showUpdateDialog(final String key, final Category item) {
+        final AlertDialog.Builder alertdialog = new AlertDialog.Builder(ADCategoryAC.this);
+        alertdialog.setTitle(R.string.updateCateogry);
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View add_menu_layout = inflater.inflate(R.layout.update_category1,null);
+
+        updatename = add_menu_layout.findViewById(R.id.edt_update_name_category);
+        updateiamge = add_menu_layout.findViewById(R.id.edt_update_image_category);
+
+        updatename.setText(item.getName());
+        updateiamge.setText(item.getImage());
+
+
+        alertdialog.setView(add_menu_layout);
+        alertdialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+
+        alertdialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+//                String name = updatename.getText().toString().trim();
+//                String image = updateiamge.getText().toString().trim();
+                item.setName(updatename.getText().toString().trim());
+                item.setImage(updateiamge.getText().toString().trim());
+                databaseReference.child(key).setValue(item);
+
+            }
+        });
+
+        alertdialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertdialog.show();
+    }
+
 
     public void  init(){
         recyclerView = findViewById(R.id.RV_ADCategory);
@@ -129,5 +189,24 @@ public class ADCategoryAC extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference("Category");
         fab = findViewById(R.id.fab_ADcategory);
         dialog = new AddCategoryDialog();
+    }
+
+    public void removedata(final int position){
+        Toast.makeText(this, ""+position, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, ""+ adapter.getItemCount(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "" +adapter.getRef(position).getKey(), Toast.LENGTH_SHORT).show();
+        databaseReference.child(adapter.getRef(position).getKey()).removeValue();
+        Toast.makeText(this, "Delete Success!", Toast.LENGTH_SHORT).show();
+
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
     }
 }

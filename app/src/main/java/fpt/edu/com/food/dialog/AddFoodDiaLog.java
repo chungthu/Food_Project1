@@ -8,27 +8,21 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fpt.edu.com.food.R;
-import fpt.edu.com.food.model.Category;
 import fpt.edu.com.food.model.Food;
 
 public class AddFoodDiaLog extends DialogFragment {
@@ -41,8 +35,6 @@ public class AddFoodDiaLog extends DialogFragment {
     private DatabaseReference data_category;
     private DatabaseReference data_food;
     private String ids = "";
-    private List list;
-
 
     @NonNull
     @Override
@@ -60,7 +52,7 @@ public class AddFoodDiaLog extends DialogFragment {
 
         loadIdCategory();
 //        spinner();
-        IdCategory();
+//        IdCategory();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view)
@@ -97,27 +89,20 @@ public class AddFoodDiaLog extends DialogFragment {
     public void loadIdCategory(){
         data_category = firebaseDatabase.getReference("Category");
 
-//        Query id = data_category.orderByChild("Name");
-//        Log.e("Tag","Name "+id);
-
         data_category.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final List<String> category = new ArrayList<String>();
                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-                    String idCateogry = areaSnapshot.getKey();
-                    Log.e("Tag","Id:"+ idCateogry);
 
+                    String Categorys = areaSnapshot.child("name").getValue(String.class);
+                    category.add(Categorys);
+                    ids = areaSnapshot.getKey();
 
-                    list = new ArrayList<>();
-                    list.add(idCateogry);
-                    Log.e("Tag","Ids:"+ list);
-                    ArrayAdapter<String> IDAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, list);
-                    IDAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spIdcategory.setAdapter(IDAdapter);
-
-
-                    Log.e("Tag","ids "+ids);
                 }
+                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, category);
+                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spIdcategory.setAdapter(areasAdapter);
             }
 
             @Override
@@ -128,20 +113,19 @@ public class AddFoodDiaLog extends DialogFragment {
 
     }
 
-    public void IdCategory(){
-        spIdcategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ids = spIdcategory.getSelectedItem().toString();
-                Toast.makeText(getActivity(), ids, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
+//    public void IdCategory(){
+//        spIdcategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(getActivity(), ids, Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+//    }
 
 //    public void spinner(){
 //        data_category = firebaseDatabase.getReference("Category");

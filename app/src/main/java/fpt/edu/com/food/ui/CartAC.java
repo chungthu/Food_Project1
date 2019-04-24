@@ -88,7 +88,8 @@ public class CartAC extends AppCompatActivity {
                         edtAddress.getText().toString(),
                         txt_Total.getText().toString(),
                         cart,
-                        strDate
+                        strDate,
+                        "0"
                 );
 
                 requests.child(String.valueOf(System.currentTimeMillis()))
@@ -121,9 +122,6 @@ public class CartAC extends AppCompatActivity {
         Locale locale = new Locale("en", "US");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
         txt_Total.setText(fmt.format(total));
-
-        adapter.notifyDataSetChanged();
-
 
     }
 

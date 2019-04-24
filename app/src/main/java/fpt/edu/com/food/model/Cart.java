@@ -19,9 +19,7 @@ public class Cart {
         this.image = image;
     }
 
-    public Cart(double total) {
-        this.total = total;
-    }
+
 
     public String getNamefood() {
         return namefood;

@@ -40,7 +40,7 @@ import fpt.edu.com.food.R;
 import fpt.edu.com.food.fragment.CategoryFragment;
 import fpt.edu.com.food.fragment.TimeOderFragment;
 import fpt.edu.com.food.model.Category;
-import fpt.edu.com.food.service.ListenOrder;
+import fpt.edu.com.food.service.AddService;
 import fpt.edu.com.food.viewholder.CategoryViewHolder;
 
 
@@ -67,6 +67,9 @@ public class HomeAC extends AppCompatActivity
         init();
 
         setFragment(new CategoryFragment());
+
+//        startService(new Intent(HomeAC.this, AddService.class));
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -199,19 +202,9 @@ public class HomeAC extends AppCompatActivity
             j = (String) b.get("Account");
         }
 
-        startService(new Intent(HomeAC.this, ListenOrder.class));
     }
 
 
-    //LoadCategory
-
-//    @Override
-//    public void onStop() {
-//        if (adapter != null){
-//            adapter.stopListening();
-//        }
-//        super.onStop();
-//    }
 
     public void displayCategory(){
         options =

@@ -74,4 +74,6 @@
     <string name="Delete">Delete</string>
     <string name="updateCateogry">Update Category</string>
     <string name="updateFood">Update Food</string>
+    <string name="title_activity_adhome_ac">ADHomeAC</string>
+    <string name="action_settings">Settings</string>
 </resources>

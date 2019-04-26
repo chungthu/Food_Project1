@@ -15,9 +15,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".service.ListenOrder"
+            android:name=".service.AddService"
             android:enabled="true"
             android:exported="true"></service>
+
+        <activity android:name=".ui.RequestAC" />
+        <activity
+            android:name=".ui.ADHomeAC"
+            android:label="@string/title_activity_adhome_ac"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".service.ListenOrder"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity android:name=".ui.ADAccoutAC" />
         <activity android:name=".ui.AccountAC" />

@@ -2,7 +2,6 @@ package fpt.edu.com.food.service;
 
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -19,11 +18,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Random;
 
-import fpt.edu.com.food.R;
 import fpt.edu.com.food.model.Request;
 import fpt.edu.com.food.ui.TimeOrderAC;
 
-public class ListenOrder extends Service implements ChildEventListener {
+public class AddService extends Service implements ChildEventListener {
 
     FirebaseDatabase db;
     DatabaseReference order;
@@ -33,6 +31,7 @@ public class ListenOrder extends Service implements ChildEventListener {
         super.onCreate();
         db = FirebaseDatabase.getInstance();
         order = db.getReference("Request");
+
     }
 
     @Override
@@ -41,13 +40,13 @@ public class ListenOrder extends Service implements ChildEventListener {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    public ListenOrder() {
+    public AddService() {
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+        throw null;
     }
 
     @Override
@@ -60,22 +59,16 @@ public class ListenOrder extends Service implements ChildEventListener {
 
     private void showNotification(String key, Request request) {
         Intent intent = new Intent(getBaseContext(), TimeOrderAC.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),0,intent,0);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext());
 
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext());
         builder.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
-                .setTicker("Food")
-                .setContentInfo("New Order")
-                .setContentText("You have new order: "+key)
-                .setShowWhen(false)
-                .setSmallIcon(R.drawable.ic_shopping_cart_black_24dp);
+                .setTicker("Chung");
 
         NotificationManager manager = (NotificationManager) getBaseContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // if you want to many notification show, you need give unique Id for each Notification
-         int random = new Random().nextInt(9999-1)+1;
-         manager.notify(random,builder.build());
+        int random = new Random().nextInt(9999-1)+1;
+        manager.notify(random,builder.build());
     }
 
     @Override

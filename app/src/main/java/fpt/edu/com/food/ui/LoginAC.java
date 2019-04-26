@@ -1,5 +1,6 @@
 package fpt.edu.com.food.ui;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import dmax.dialog.SpotsDialog;
 import fpt.edu.com.food.R;
 import fpt.edu.com.food.model.User;
 
@@ -23,6 +25,7 @@ public class LoginAC extends AppCompatActivity {
     private EditText edtPhone;
     private EditText edtPassword;
     FirebaseDatabase database;
+    AlertDialog alertDialog;
 
 
     @Override
@@ -41,46 +44,14 @@ public class LoginAC extends AppCompatActivity {
     public void Login(View view) {
         init();
         database = FirebaseDatabase.getInstance();
-        DatabaseReference table_user = database.getReference("User");
-        Query query = table_user.orderByChild("phone").equalTo(edtPhone.getText().toString());
         String phone = edtPhone.getText().toString().trim();
 
-        final Intent intent = new Intent(LoginAC.this, HomeAC.class);
-        intent.putExtra("Account",phone);
+        if (phone.equals("12345")){
+            useradmin();
+        }else {
+            usercase();
+        }
 
-
-        table_user.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                //Check if user not exist in Database
-                if (dataSnapshot.child(edtPhone.getText().toString().trim()).exists()) {
-
-                    //Get user information
-                    User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
-                    if (user.getPassword().equals(edtPassword.getText().toString().trim())) {
-                        Toast.makeText(LoginAC.this, "Sign In successfully !", Toast.LENGTH_SHORT).show();
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(LoginAC.this, "Sign In failed", Toast.LENGTH_SHORT).show();
-                    }
-
-                } else {
-                    Toast.makeText(LoginAC.this, "User not exist in Databse", Toast.LENGTH_SHORT).show();
-//                    startActivity(new Intent(LoginAC.this, HomeAC.class));
-                }
-//                startActivity(new Intent(LoginAC.this, HomeAC.class));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-//        startActivity(intent);
 
     }
 
@@ -88,6 +59,7 @@ public class LoginAC extends AppCompatActivity {
     public void init() {
         edtPhone = (EditText) findViewById(R.id.edt_user);
         edtPassword = (EditText) findViewById(R.id.edt_password);
+        alertDialog = new SpotsDialog.Builder().setContext(this).build();
     }
 
     public void getdata() {
@@ -105,4 +77,87 @@ public class LoginAC extends AppCompatActivity {
             edtPassword.setText(b);
         }
     }
+
+    public void usercase(){
+        DatabaseReference table_user = database.getReference("User");
+        String phone = edtPhone.getText().toString().trim();
+        final Intent intent = new Intent(LoginAC.this, HomeAC.class);
+        intent.putExtra("Account",phone);
+        alertDialog.show();
+        table_user.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                //Check if user not exist in Database
+                if (dataSnapshot.child(edtPhone.getText().toString().trim()).exists()) {
+
+                    //Get user information
+                    User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                    if (user.getPassword().equals(edtPassword.getText().toString().trim())) {
+                        Toast.makeText(LoginAC.this, "Sign In successfully !", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                        alertDialog.dismiss();
+
+                        finish();
+                    } else {
+                        Toast.makeText(LoginAC.this, "Sign In failed", Toast.LENGTH_SHORT).show();
+                        alertDialog.dismiss();
+                    }
+
+                } else {
+                    Toast.makeText(LoginAC.this, "User not exist in Databse", Toast.LENGTH_SHORT).show();
+                    alertDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void useradmin(){
+
+        DatabaseReference table_user = database.getReference("User");
+        String phone = edtPhone.getText().toString().trim();
+        final Intent intent = new Intent(LoginAC.this, ADHomeAC.class);
+        intent.putExtra("Account",phone);
+        alertDialog.show();
+        table_user.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                //Check if user not exist in Database
+                if (dataSnapshot.child(edtPhone.getText().toString().trim()).exists()) {
+
+                    //Get user information
+                    User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                    if (user.getPassword().equals(edtPassword.getText().toString().trim())) {
+                        Toast.makeText(LoginAC.this, "Sign In successfully !", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                        alertDialog.dismiss();
+
+                        finish();
+                    } else {
+                        Toast.makeText(LoginAC.this, "Sign In failed", Toast.LENGTH_SHORT).show();
+                        alertDialog.dismiss();
+                    }
+
+                } else {
+                    Toast.makeText(LoginAC.this, "User not exist in Databse", Toast.LENGTH_SHORT).show();
+                    alertDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
 }

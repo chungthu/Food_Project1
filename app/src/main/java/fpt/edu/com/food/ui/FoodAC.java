@@ -24,7 +24,6 @@ import java.util.List;
 
 import fpt.edu.com.food.R;
 import fpt.edu.com.food.adapter.ProductAdapter;
-import fpt.edu.com.food.dialog.AddFoodDiaLog;
 import fpt.edu.com.food.model.Food;
 
 public class FoodAC extends AppCompatActivity {

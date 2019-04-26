@@ -1,7 +1,13 @@
 package fpt.edu.com.food.ui;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import fpt.edu.com.food.R;
 import fpt.edu.com.food.adapter.CartAdapter;
@@ -97,7 +104,9 @@ public class CartAC extends AppCompatActivity {
 
                 order.delete();
                 Toast.makeText(CartAC.this,R.string.CartAC_Thank, Toast.LENGTH_SHORT).show();
+                showNotification();
                 finish();
+
             }
         });
         dialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -109,6 +118,41 @@ public class CartAC extends AppCompatActivity {
 
         dialog.show();
 
+    }
+
+    private void showNotification() {
+
+        Intent intent = new Intent(getBaseContext(), TimeOrderAC.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),0,intent,0);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext());
+
+        builder.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setTicker("Food")
+                .setContentInfo("New Order")
+                .setContentText("You have new order: ")
+                .setSmallIcon(R.drawable.ic_shopping_cart_black_24dp)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+
+//        NotificationManager manager = (NotificationManager) getBaseContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // if you want to many notification show, you need give unique Id for each Notification
+//        int random = new Random().nextInt(9999-1)+1;
+//        manager.notify(random,builder.build());
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+// notificationId is a unique int for each notification that you must define
+        notificationManager.notify(1, builder.build());
+
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+//                .setDefaults(Notification.DEFAULT_ALL)
+////                .setTicker("Food")
+////                .setContentInfo("New Order")
+////                .setContentText("You have new order: ")
+////                .setSmallIcon(R.drawable.ic_shopping_cart_black_24dp);
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
     }
 
     private void loadFoodList() {

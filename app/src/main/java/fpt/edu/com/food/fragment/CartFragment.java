@@ -1,54 +1,39 @@
 package fpt.edu.com.food.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.Time;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import fpt.edu.com.food.R;
-import fpt.edu.com.food.dialog.LocationDialog;
-import fpt.edu.com.food.model.Cart;
-import fpt.edu.com.food.viewholder.CartViewHolder;
+import fpt.edu.com.food.model.TimeOder;
+import fpt.edu.com.food.ui.ADCartAC;
+import fpt.edu.com.food.ui.ADFoodAC;
+import fpt.edu.com.food.ui.RequestAC;
+import fpt.edu.com.food.viewholder.TimeViewHolder;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CartFragment extends Fragment {
 
-    private RecyclerView reCart;
-    private TextView Total;
-    private Button book;
+    private RecyclerView recyclerView;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference data_Cart;
-    private DatabaseReference id_Cart;
-    private FirebaseRecyclerOptions<Cart> options;
-    private FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter;
-    double sum = 0;
-    private String account;
-    private LocationDialog dialog;
+    private DatabaseReference databaseReference;
+    private FirebaseRecyclerOptions<TimeOder> options;
+    private FirebaseRecyclerAdapter<TimeOder, TimeViewHolder> adapter;
+    private LinearLayoutManager linearLayoutManager;
 
 
     public CartFragment() {
@@ -59,121 +44,54 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
-        reCart =  view.findViewById(R.id.re_Cart);
-        Total =  view.findViewById(R.id.Total);
-        book =  view.findViewById(R.id.book);
+        recyclerView = view.findViewById(R.id.RE_Cart);
         firebaseDatabase = FirebaseDatabase.getInstance();
-        data_Cart = firebaseDatabase.getReference("Cart");
+        databaseReference = firebaseDatabase.getReference("Request");
+        linearLayoutManager = new LinearLayoutManager(getContext());
 
 
-//        String id = data_Cart.getRef().getKey();
-
-        account = getArguments().getString("data");
-        
-
-        data_Cart.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                loadCart();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        loadCart();
-        book.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Book();
-            }
-        });
-
+        loadTimeOrder();
         return view;
     }
 
-    @Override
-    public void onStop() {
-        if (adapter != null){
-            adapter.stopListening();
-        }
-        super.onStop();
-    }
-
-    public void loadCart(){
-
+    private void loadTimeOrder() {
         options =
-                new FirebaseRecyclerOptions.Builder<Cart>()
-                .setQuery(data_Cart,Cart.class)
-                .build();
+                new FirebaseRecyclerOptions.Builder<TimeOder>()
+                        .setQuery(databaseReference,TimeOder.class)
+                        .build();
+
         adapter =
-                new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
+                new FirebaseRecyclerAdapter<TimeOder, TimeViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull final Cart model) {
-
-                        final String id = adapter.getRef(position).getKey();
-                        holder.nameItemCart.setText(model.getNamefood());
-                        holder.txtItemCart.setText("Total: "+model.getTotal()+ " $");
-                        Picasso.with(getContext()).load(model.getImage())
-                                .into(holder.imgItemCart);
-
-
-
-                        holder.imgItemCartclear.setOnClickListener(new View.OnClickListener() {
+                    protected void onBindViewHolder(@NonNull TimeViewHolder holder, final int position, @NonNull TimeOder model) {
+                        holder.txt_phone.setText(model.getPhone());
+                        holder.txt_location.setText(model.getLocation());
+//                        holder.txt_status.setText(model.getSatus());
+                        holder.txt_total.setText(model.getTotal());
+                        holder.txt_date.setText(model.getDate());
+                        holder.cardView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                id_Cart = firebaseDatabase.getReference("Cart").getRef().child(id);
-                                Toast.makeText(getActivity(), ""+id_Cart, Toast.LENGTH_SHORT).show();
-                                id_Cart.removeValue();
-                                notifyDataSetChanged();
-
+                                Intent intent = new Intent(getActivity(), RequestAC.class);
+                                intent.putExtra("Cart_Id",adapter.getRef(position).getKey());
+                                startActivity(intent);
                             }
                         });
-
-
-                        Log.e("Tag","sum "+ model.getTotal());
-                        Log.e("Tag","sum "+ sum);
-
-                        List list = new ArrayList();
-                        list.add(model.getTotal());
-
-                        Double a = (Double) list.get(0);
-                        sum = sum +  a;
-
-
-                        Total.setText("Total: "+ String.valueOf(sum)+" $");
                     }
 
                     @NonNull
                     @Override
-                    public CartViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                        View itemview = LayoutInflater.from(getContext()).inflate(R.layout.item_cart,viewGroup,false);
-                        return new CartViewHolder(itemview);
+                    public TimeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                        View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_time_order, viewGroup, false);
+                        return new TimeViewHolder(view);
                     }
                 };
+
         adapter.startListening();
-        reCart.setLayoutManager(new LinearLayoutManager(getContext()));
-        reCart.setAdapter(adapter);
-    }
-
-    public void Book(){
-//        Double Totals = Double.parseDouble(Total.getText().toString().trim());
-        String phone = account;
-        Time now = new Time();
-        now.setToNow();
-//        String Location =
-        showEditDialog();
-    }
-
-    private void showEditDialog() {
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        dialog = new LocationDialog();
-        dialog.show(fm,"OK");
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
     }
 
 }
